@@ -1,21 +1,7 @@
-ubuntu-13.10-20131031:
-  :roles:
-    - common
-  :name: Ubuntu 13.10
-  :version: 20131031
-  :doc_url: http://wiki.joyent.com/jpc2/Ubuntu
-
-ubuntu-12.04-20131031:
+ubuntu-12.04-20131105:
   :roles:
     - common
   :name: Ubuntu 12.04.3 LTS
-  :version: 20131031
-  :doc_url: http://wiki.joyent.com/jpc2/Ubuntu
-
-ubuntu-13.04-20131031:
-  :roles:
-    - common
-  :name: Ubuntu 13.04
-  :version: 20131031
+  :version: 20131105
   :doc_url: http://wiki.joyent.com/jpc2/Ubuntu
 
