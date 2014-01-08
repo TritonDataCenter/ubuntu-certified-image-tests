@@ -1,6 +1,6 @@
 ubuntu-13.10-20140106:
   :roles:
-    - common
+    - ubuntu
   :name: Ubuntu 13.10
   :version: 20140106
   :doc_url: http://wiki.joyent.com/jpc2/Ubuntu
