@@ -9,7 +9,7 @@ describe file('/etc/product') do
 end
 
 # Version info used for MOTD
-#describe file('/etc/cloud/build.info') do
-#  it { should be_file }
-#	it { should contain "serial: #{attr[:version]}" }
-#end
+describe file('/etc/update-motd.d/05-cloud-branding') do
+  it { should be_file }
+	it { should contain "VERSION=\"#{attr[:version]}\"" }
+end
