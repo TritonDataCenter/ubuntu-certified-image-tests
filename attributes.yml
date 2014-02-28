@@ -1,13 +1,13 @@
-ubuntu-13.10-20140219:
+ubuntu-13.10-20140227:
   :roles:
     - ubuntu
   :name: Ubuntu 13.10
-  :version: 20140219
+  :version: 20140227
   :doc_url: http://wiki.joyent.com/jpc2/Ubuntu+Certified
 
-ubuntu-12.04-20140219:
+ubuntu-12.04-20140227:
   :roles:
     - ubuntu
   :name: Ubuntu 12.04.4 LTS
-  :version: 20140219
+  :version: 20140227
   :doc_url: http://wiki.joyent.com/jpc2/Ubuntu+Certified
