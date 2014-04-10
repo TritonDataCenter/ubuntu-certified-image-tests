@@ -5,6 +5,13 @@ ubuntu-12.04-20140408:
   :version: 20140408
   :doc_url: http://wiki.joyent.com/jpc2/Ubuntu+Certified
 
+ubuntu-13.10-20140410:
+  :roles:
+    - ubuntu
+  :name: Ubuntu 13.10
+  :version: 20140410
+  :doc_url: http://wiki.joyent.com/jpc2/Ubuntu+Certified
+
 ubuntu-14.04-20140326:
   :roles:
     - ubuntu
