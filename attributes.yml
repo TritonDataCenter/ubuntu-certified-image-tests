@@ -12,17 +12,10 @@ ubuntu-13.10-20140410:
   :version: 20140410
   :doc_url: http://wiki.joyent.com/jpc2/Ubuntu+Certified
 
-ubuntu-14.04-20140326:
+ubuntu-14.04-20140414:
   :roles:
     - ubuntu
-  :name: Ubuntu Trusty Tahr (development branch)
-  :version: 20140326
-  :doc_url: http://wiki.joyent.com/jpc2/Ubuntu+Certified
-
-ubuntu-14.04-20140313:
-  :roles:
-    - ubuntu
-  :name: Ubuntu Trusty Tahr (development branch)
-  :version: 20140313
+  :name: Ubuntu 14.04 LTS
+  :version: 20140414
   :doc_url: http://wiki.joyent.com/jpc2/Ubuntu+Certified
 
