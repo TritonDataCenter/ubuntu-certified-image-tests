@@ -19,3 +19,9 @@ ubuntu-14.04-20140414:
   :version: 20140414
   :doc_url: http://wiki.joyent.com/jpc2/Ubuntu+Certified
 
+ubuntu-14.04-20140416:
+  :roles:
+    - ubuntu
+  :name: Ubuntu 14.04 LTS
+  :version: 20140416
+  :doc_url: http://wiki.joyent.com/jpc2/Ubuntu+Certified
