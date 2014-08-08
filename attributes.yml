@@ -1,7 +1,13 @@
 ubuntu:
   :roles:
     - ubuntu
-  :name: Ubuntu 14.04.1 LTS
-  :version: 20140725
+  :name: Ubuntu 12.04.5 LTS
+  :version: 20140806
   :doc_url: http://wiki.joyent.com/jpc2/Ubuntu+Certified
 
+ubuntu-custom:
+  :roles:
+    - ubuntu
+  :name: Ubuntu 12.04.5 LTS
+  :version: 20140806
+  :doc_url: http://wiki.joyent.com/jpc2/Ubuntu+Certified
