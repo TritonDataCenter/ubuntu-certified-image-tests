@@ -1,0 +1,6 @@
+ubuntu-14.10:
+  :roles:
+    - ubuntu
+  :name: Ubuntu 14.10
+  :version: 20141022
+  :doc_url: http://wiki.joyent.com/jpc2/Ubuntu+Certified
