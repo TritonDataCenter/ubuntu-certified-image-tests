@@ -4,12 +4,12 @@ require 'spec_helper'
 describe file('/etc/product') do
 	it { should be_file }
 	it { should contain "Name: Joyent Instance" }
-	it { should contain "Image: #{attr[:name]} #{attr[:version]}" }
-	it { should contain "Documentation: #{attr[:doc_url]}" }
+	it { should contain "Image: #{property[:name]} #{property[:version]}" }
+	it { should contain "Documentation: #{property[:doc_url]}" }
 end
 
 # Version info used for MOTD
 describe file('/etc/update-motd.d/05-cloud-branding') do
   it { should be_file }
-	it { should contain "VERSION=\"#{attr[:version]}\"" }
+	it { should contain "VERSION=\"#{property[:version]}\"" }
 end
