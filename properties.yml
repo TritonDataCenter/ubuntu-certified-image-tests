@@ -1,6 +1,20 @@
-ubuntu-14.10:
+ubuntu-12.04:
   :roles:
     - ubuntu
-  :name: Ubuntu 14.10
-  :version: 20141022
-  :doc_url: http://wiki.joyent.com/jpc2/Ubuntu+Certified
+  :name: Ubuntu 12.04.5 LTS 
+  :version: 20150225 
+  :doc_url: https://docs.joyent.com/images/linux/ubuntu-certified
+
+ubuntu-14.04:
+   :roles:
+        - ubuntu
+   :name: Ubuntu 14.04.2 LTS
+   :version: 20150225.2
+   :doc_url: https://docs.joyent.com/images/linux/ubuntu-certified 
+
+ubuntu-15.04:
+   :roles:
+        - ubuntu
+   :name: Ubuntu 15.04 LTS
+   :version: 20150224.5
+   :doc_url: https://docs.joyent.com/images/linux/ubuntu-certified
