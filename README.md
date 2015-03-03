@@ -39,7 +39,7 @@ To run the tests, run the following command (within this directory):
 
 ```
 rake serverspec
-``
+```
 
 More information on how to create serverspec tests can be found here:
 
