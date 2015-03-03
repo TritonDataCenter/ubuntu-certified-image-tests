@@ -16,28 +16,30 @@ Add the name and attibutes of what you want to test to attributes.yml. Next, edi
 
 For example, here's a attrubutes.yml file:
 
-``
+```
 base-13.3.1:
   :roles:
     - base-common
   :name: base
   :base_version: 13.3.1
   :doc_url: http://wiki.joyent.com/jpc2/SmartMachine+Base
-``
+```
 
 And an example `~/.ssh/config` file:
 
-``
+```
 Host base-13.3.1 
   HostName XX.X.XXX.XXX
   User root
-``
+```
 
 ## Running the tests
 
 To run the tests, run the following command (within this directory):
 
-`rake serverspec`
+```
+rake serverspec
+``
 
 More information on how to create serverspec tests can be found here:
 
