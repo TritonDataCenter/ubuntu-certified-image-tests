@@ -12,7 +12,7 @@ Install serverspec with
 
 `gem install serverspec`
 
-Add the name and attibutes of what you want to test to attributes.yml. Next, edit your `~/.ssh/config` file with the host information of the virtual machines you want to test. The name you chose for _Host_ in `~/.ssh/config should match what you have in attributes.yml. 
+Add the name and attibutes of what you want to test to attributes.yml. Next, edit your `~/.ssh/config` file with the host information of the virtual machines you want to test. The name you chose for _Host_ in `~/.ssh/config` should match what you have in attributes.yml. 
 
 For example, here's a attrubutes.yml file:
 
