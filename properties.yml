@@ -12,9 +12,3 @@ ubuntu-14.04:
    :version: 20150225.2
    :doc_url: https://docs.joyent.com/images/linux/ubuntu-certified 
 
-ubuntu-15.04:
-   :roles:
-        - ubuntu
-   :name: Ubuntu 15.04 LTS
-   :version: 20150224.5
-   :doc_url: https://docs.joyent.com/images/linux/ubuntu-certified
