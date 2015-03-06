@@ -18,6 +18,8 @@ Modify `properties.yml` with the name and properties you want to test.
 
 Next, edit your `~/.ssh/config` file with the host information of the virtual machines you want to test. The name you chose for _Host_ in `~/.ssh/config` should match what you have in `properties.yml`. 
 
+For example, here's a properties.yml file:
+
     ubuntu-12.04:
       :roles:
         - ubuntu
