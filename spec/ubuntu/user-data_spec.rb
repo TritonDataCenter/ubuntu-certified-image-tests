@@ -5,5 +5,6 @@ describe file('/var/db/mdata-user-data') do
   it { should be_file }
   it { should_not be_executable }
   it { should be_owned_by 'root' }
+  it { should contain 'This is user-data!' }
 end
 
