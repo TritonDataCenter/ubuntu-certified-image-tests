@@ -2,7 +2,8 @@ ubuntu-12.04:
   :roles:
     - ubuntu
   :name: Ubuntu 12.04.5 LTS 
-  :version: 20150225 
+  :version: 20150225
+  :release: 14.04
   :doc_url: https://docs.joyent.com/images/linux/ubuntu-certified
 
 ubuntu-14.04:
@@ -10,5 +11,6 @@ ubuntu-14.04:
         - ubuntu
    :name: Ubuntu 14.04.2 LTS
    :version: 20150225.2
+   :release: 14.04
    :doc_url: https://docs.joyent.com/images/linux/ubuntu-certified 
 
