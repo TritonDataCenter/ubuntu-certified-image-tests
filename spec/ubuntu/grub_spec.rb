@@ -6,6 +6,7 @@ describe file('/etc/default/grub.d/50-cloudimg-settings.cfg') do
 end
 
 
+# This will change for the final 16.04 image and the testing logic should be modified.
 # net.ifnames=0 was added to 16.04 to ensure the image uses eth(0-9) interface 
 # naming
 if property[:release] >= 16.04
