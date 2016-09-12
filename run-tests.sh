@@ -57,7 +57,6 @@ PACKAGE=
 IMAGENAME=
 VERSION=
 UUID=
-NAME=
 TAG="test-instance=true"
 UUID=
 SCRIPT=$PWD/userscript.sh
@@ -151,28 +150,28 @@ USERDATA
 
 create_instance() {
     IMAGE=$1
-    NAME=$2
+    INST_NAME=$2
     echo "Provisioning:"
-    triton -p ${PROFILE} instance create -w -n $NAME -N $PUBLIC_NETWORK -N $PRIVATE_NETWORK -t $TAG --script=$SCRIPT -M $METADATAFILE $IMAGE $PACKAGE
+    triton -p ${PROFILE} instance create -w -n $INST_NAME -N $PUBLIC_NETWORK -N $PRIVATE_NETWORK -t $TAG --script=$SCRIPT -M $METADATAFILE $IMAGE $PACKAGE
 }
 
 wait_for_IP() {
-    NAME=$1
+    INST_NAME=$1
     echo "Checking Public IP:"
 
     while [[ true ]]; do
         echo -n "."
-        ping -c1 $(triton -p ${PROFILE} instance ip $NAME) > /dev/null && break;
+        ping -c1 $(triton -p ${PROFILE} instance ip $INST_NAME) > /dev/null && break;
     done
     echo ""
     echo "IP is now live."
 }
 
 test_image() {
-    NAME=$1
+    INST_NAME=$1
     
 cat <<PROPYML >properties.yml
-$NAME:
+$INST_NAME:
   :roles:
     - ubuntu
   :name: $PROPER_NAME
@@ -181,7 +180,7 @@ $NAME:
   :doc_url: https://docs.joyent.com/images/linux/ubuntu-certified
 PROPYML
 
-    TARGET_HOST_NAME=$(triton -p ${PROFILE} instance ip $NAME) \
+    TARGET_HOST_NAME=$(triton -p ${PROFILE} instance ip $INST_NAME) \
       TARGET_USER_NAME=ubuntu rake serverspec
 
     echo "###########################"
@@ -196,20 +195,20 @@ create_custom_image() {
     echo "Stopping $INSTANCE"
     triton -p ${PROFILE} instance stop -w $INSTANCE
     echo "Creating custom image of $INSTANCE"
-    triton -p ${PROFILE} image create -w -t $TAG $INSTANCE $NAME $VERSION
+    triton -p ${PROFILE} image create -w -t $TAG $INSTANCE $IMAGE $VERSION
     echo "Restarting $INSTANCE"
     triton -p ${PROFILE} instance start -w $INSTANCE
 }
 
 delete_instance() {
-    NAME=$1
-    echo "Deleting test instance $NAME"
-    triton -p ${PROFILE} instance delete $NAME
+    INST_NAME=$1
+    echo "Deleting test instance $INST_NAME"
+    triton -p ${PROFILE} instance delete $INST_NAME
 }
 
 delete_image() {
-    IMAGE=$1
-    triton -p ${PROFILE} image delete -f $IMAGE
+    CUSTOM_IMAGE=$1
+    triton -p ${PROFILE} image delete -f $CUSTOM_IMAGE
 }
 
 cleanup() {
@@ -227,11 +226,12 @@ cleanup() {
 get_image_details $IMAGE
 choose_package
 get_networks
-create_instance $IMAGE ${IMAGENAME}-${VERSION}-${DATE}
-wait_for_IP $NAME
-test_image $NAME
+INSTACE_NAME=${IMAGENAME}-${VERSION}-${DATE}
+create_instance $IMAGE $INSTACE_NAME
+wait_for_IP $INSTACE_NAME
+test_image $INSTACE_NAME
 
-INSTACE_NAME=$NAME
+
 
 create_custom_image $INSTACE_NAME
 
