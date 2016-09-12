@@ -182,7 +182,7 @@ $NAME:
 PROPYML
 
     TARGET_HOST_NAME=$(triton -p ${PROFILE} instance ip $NAME) \
-      TARGET_USER_NAME=root rake serverspec
+      TARGET_USER_NAME=ubuntu rake serverspec
 
     echo "###########################"
     echo "All $RELEASE tests PASSED."
