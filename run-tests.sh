@@ -106,7 +106,6 @@ get_image_details() {
 }
 
 choose_package() {
-
     PACKAGE=$(triton -p ${PROFILE} package list -H memory=768 -o id | head -1)
     echo "Using package:"
     echo "    $PACKAGE"
@@ -149,14 +148,14 @@ in culpa qui officia deserunt mollit anim id est laborum.
 USERDATA
 
 create_instance() {
-    IMAGE=$1
-    INST_NAME=$2
+    local IMAGE=$1
+    local INST_NAME=$2
     echo "Provisioning:"
     triton -p ${PROFILE} instance create -w -n $INST_NAME -N $PUBLIC_NETWORK -N $PRIVATE_NETWORK -t $TAG --script=$SCRIPT -M $METADATAFILE $IMAGE $PACKAGE
 }
 
 wait_for_IP() {
-    INST_NAME=$1
+    local INST_NAME=$1
     echo "Checking Public IP:"
 
     while [[ true ]]; do
@@ -167,8 +166,21 @@ wait_for_IP() {
     echo "IP is now live."
 }
 
+wait_for_ssh() {
+    local INST_NAME=$1
+    local COUNT=0
+    echo "Checking ssh on $INST_NAME"
+    # Time out after a minute
+    while [[ true || "$COUNT" -gt 60 ]]; do
+        ssh -q ubuntu@$(triton -p ${PROFILE} instance ip $INST_NAME) exit > /dev/null && break;
+        sleep 1
+        COUNT=$((COUNT+1))
+    done
+}
+
+
 test_image() {
-    INST_NAME=$1
+    local INST_NAME=$1
     
 cat <<PROPYML >properties.yml
 $INST_NAME:
@@ -180,8 +192,9 @@ $INST_NAME:
   :doc_url: https://docs.joyent.com/images/linux/ubuntu-certified
 PROPYML
 
-    TARGET_HOST_NAME=$(triton -p ${PROFILE} instance ip $INST_NAME) \
-      TARGET_USER_NAME=ubuntu rake serverspec
+    export TARGET_HOST_NAME=$(triton -p ${PROFILE} instance ip $INST_NAME)
+    export TARGET_USER_NAME=ubuntu
+    rake serverspec
 
     echo "###########################"
     echo "All $RELEASE tests PASSED."
@@ -190,24 +203,25 @@ PROPYML
 }
 
 create_custom_image() {
-    INSTANCE=$1
+    local INSTANCE=$1
+    local CUSTOM_IMAGE=$IMAGENAME-CUST
     # This is here to workaround a bug where the instance is not stopped properly
     echo "Stopping $INSTANCE"
     triton -p ${PROFILE} instance stop -w $INSTANCE
     echo "Creating custom image of $INSTANCE"
-    triton -p ${PROFILE} image create -w -t $TAG $INSTANCE $IMAGE $VERSION
+    triton -p ${PROFILE} image create -w -t $TAG $INSTANCE $CUSTOM_IMAGE $VERSION
     echo "Restarting $INSTANCE"
     triton -p ${PROFILE} instance start -w $INSTANCE
 }
 
 delete_instance() {
-    INST_NAME=$1
+    local INST_NAME=$1
     echo "Deleting test instance $INST_NAME"
     triton -p ${PROFILE} instance delete $INST_NAME
 }
 
 delete_image() {
-    CUSTOM_IMAGE=$1
+    local CUSTOM_IMAGE=$1
     triton -p ${PROFILE} image delete -f $CUSTOM_IMAGE
 }
 
@@ -226,31 +240,34 @@ cleanup() {
 get_image_details $IMAGE
 choose_package
 get_networks
+
 INSTACE_NAME=${IMAGENAME}-${VERSION}-${DATE}
+
 create_instance $IMAGE $INSTACE_NAME
 wait_for_IP $INSTACE_NAME
+wait_for_ssh $INSTACE_NAME
+
 test_image $INSTACE_NAME
-
-
 
 create_custom_image $INSTACE_NAME
 
-CUSTOM_IMAGE_NAME=$INSTACE_NAME
-
-get_image_details $CUSTOM_IMAGE_NAME
+get_image_details $IMAGENAME-CUST
 choose_package
 get_networks
 
-CUSTOM_INSTANCE_NAME=${IMAGENAME}-${VERSION}-${DATE}-CUSTOM
+CUSTOM_INSTANCE_NAME=${IMAGENAME}-${VERSION}-${DATE}
 
-create_instance $CUSTOM_IMAGE_NAME $CUSTOM_INSTANCE_NAME
+
+create_instance $IMAGENAME $CUSTOM_INSTANCE_NAME
 wait_for_IP $CUSTOM_INSTANCE_NAME
+wait_for_ssh $CUSTOM_INSTANCE_NAME
+
 test_image $CUSTOM_INSTANCE_NAME
 
 echo "Deleting instance and custom image"
 delete_instance $INSTACE_NAME
 delete_instance $CUSTOM_INSTANCE_NAME
-delete_image $CUSTOM_IMAGE_NAME
+delete_image $IMAGENAME
 cleanup
 
 exit 0
