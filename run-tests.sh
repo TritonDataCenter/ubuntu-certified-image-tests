@@ -16,8 +16,7 @@ cat <<EOF
 Setup test instances and run tests for given image.
 
 Note: This script assumes you have the triton cli command tool setup with a 
-      profile for your test environment. Also the script requires you have 
-      a RedHat account and a subsciption in order to run some of the tests.
+      profile for your test environment.
 
 This script will:
 
