@@ -105,7 +105,7 @@ get_image_details() {
 }
 
 choose_package() {
-    PACKAGE=$(triton -p ${PROFILE} package list -H memory=768 -o id | head -1)
+    PACKAGE=$(triton -p ${PROFILE} package list -H memory=1792 -o id | head -1)
     echo "Using package:"
     echo "    $PACKAGE"
     echo ""
