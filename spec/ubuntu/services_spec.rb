@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 # The acpid service is disabled in vivid 15.04 and newer. Functionality is covered by systemd
-if property[:name].include? "12.04" or property[:name].include? "14.04" or property[:name].include? "14.10"
+if property[:name].include? "14.04" or property[:name].include? "14.10"
   describe service('acpid') do
   	it { should be_enabled }
   end
